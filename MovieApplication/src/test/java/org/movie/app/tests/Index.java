@@ -3,6 +3,7 @@ package org.movie.app.tests;
 import java.time.Duration;
 import java.util.List;
 
+import org.moviesapp.pages.Account_Page;
 import org.moviesapp.pages.HeaderPage;
 import org.moviesapp.pages.HomePage;
 import org.moviesapp.pages.LoginPage;
@@ -29,6 +30,7 @@ public class Index {
 	public HeaderPage headerPage;
 	public PopularPage popularPage;
 	public SearchPage searchPage;
+	public Account_Page account_Page;
 
 	@BeforeTest
 	public void launch() {
@@ -36,6 +38,7 @@ public class Index {
 		driver = new ChromeDriver();
 		driver.get("https://qamoviesapp.ccbp.tech");
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3000));
+		driver.manage().window().maximize();
 	}
 	/*
 	 * @AfterTest public void close() { driver.quit(); }
@@ -156,5 +159,16 @@ public class Index {
 		driver.findElement(By.xpath("//*[starts-with(@alt,'The Amazing Spider-Man')]")).click();
 		
 	}
+	@Test
+	public void AccountPage() throws Exception {
+		
+		loginPage = new LoginPage(driver);
+		account_Page = new Account_Page(driver);
+		loginPage.MovieAppLogin("rahul","rahul@2021");
+		account_Page.Profile();
+		account_Page.Logout();
+		
+	}
+	
 
 }
